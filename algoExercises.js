@@ -1,6 +1,6 @@
 /////////////////////////// Subject 1 //////////////////////////
 
-let list = [11, 15, 3, 7];
+let list = [10, 15, 3, 7];
 let k = 17;
 let result;
 
@@ -18,7 +18,9 @@ const additionalMatchNested = (arr, number) => {
     result = true ? console.log("true") : console.log("false");
 }
 
-// additionalMatchNested(list, k);
+console.log("")
+console.log("Exercice 1 :")
+additionalMatchNested(list, k);
 
 // Exercice 3
 
@@ -39,33 +41,30 @@ const additionalMatchNotNested = (arr, number) => {
     return console.log("false");
 };
 
-// additionalMatchNotNested(list, k);
+console.log("")
+console.log("Exercice 3 :")
+additionalMatchNotNested(list, k);
 
 // Exercice 5
 
-const matchNumbers = (x) => {
-    let k = 20
+const additionalMatch = (arr, k) => {
     let n = 0
-    for (let i = 1; i < (x.length); i++) {
-        console.log(x[n])
-        console.log(x[i])
-        if (x[n] + x[i] == k) {
+    for (let i = 1; i < (arr.length); i++) {
+        if (arr[n] + arr[i] == k) {
             return console.log(true);
         }
-        if (i === x.length - 1) {
-            console.log("x.length = " + x.length)
-            console.log("i = " + i)
-            console.log("n = " + n)
+        if (i === arr.length - 1) {
             i = n;
-            console.log("i = " + i)
-            console.log("n = " + n)
             i++;
             n++;
-            console.log("n = " + n)
         }
     }
     return console.log(false);
 };
+
+console.log("")
+console.log("Exercice 5 :")
+additionalMatch(list, k);
 
 /////////////////////////// Subject 2 //////////////////////////
 
@@ -87,7 +86,9 @@ const seeSunset = (arr) => {
     console.log(resultSeeSunset);
 }
 
-// seeSunset(arrBuilding)
+console.log("")
+console.log("Exercice 2 :")
+seeSunset(arrBuilding)
 
 // Exercice 4
 
@@ -104,6 +105,8 @@ const seeSunsetNotNested = (arr) => {
     console.log(resultSeeSunset);
 };
 
+console.log("")
+console.log("Exercice 4 :")
 seeSunsetNotNested(arrBuilding)
 
 // Exercice 6
@@ -119,3 +122,7 @@ const selectionSort = (x, n) => {
     }
     console.log(count)
 }
+
+console.log("")
+console.log("Exercice 6 :")
+selectionSort(arrBuilding, arrBuilding.length)

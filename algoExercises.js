@@ -15,7 +15,7 @@ const additionalMatchNested = (arr, number) => {
             }
         }
     }
-    result = true ? console.log("true") : console.log("false");
+    result == true ? console.log("true") : console.log("false");
 }
 
 console.log("")

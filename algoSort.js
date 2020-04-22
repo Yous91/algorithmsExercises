@@ -8,26 +8,19 @@ fs.readFile(process.argv[2], 'utf8', (error, data) => {
     }
 
     let arrayToSort = data.split(' ').map(Number);
-    console.log(arrayToSort); //Le contenu du fichier est présent dans data
+    // console.log(arrayToSort); //Le contenu du fichier est présent dans data
 
+    merge(arrayToSort);
+    insertionSort(arrayToSort, arrayToSort.length);
+    selectSort(arrayToSort, arrayToSort.length);
+});
 
-    //Méthode synchrone
-    // const data = fs.readFileSync(process.argv[2], 'utf8'); //Throw en cas d'erreur (donc il faut catch)
-    let counter = 0;
-    let mergeSortTopDown = (IntArray) => {
-        if (IntArray.length <= 1) {
-            return IntArray;
-        }
-        const middle = Math.floor(IntArray.length / 2);
-        const left = IntArray.slice(0, middle);
-        const right = IntArray.slice(middle);
-        counter++;
-        return mergeTopDown(mergeSortTopDown(left), mergeSortTopDown(right), counter);
-    };
-
-    function mergeTopDown(left, right) {
+const merge = (arr) => {
+    let resultCompareMergeSort = 0;
+    const mergeTopDown = (left, right) => {
         const array = [];
         while (left.length && right.length) {
+            resultCompareMergeSort++;
             if (left[0] < right[0]) {
                 array.push(left.shift());
             } else {
@@ -35,41 +28,51 @@ fs.readFile(process.argv[2], 'utf8', (error, data) => {
             }
         }
         return array.concat(left.slice()).concat(right.slice());
-        console.log(`Tri par selection: ${resultCompareselectSort} comparaisons` + ` - [${arr}]`);
     }
+    const mergeSortTopDown = (arr) => {
+        if (arr.length <= 1) {
+            return arr;
+        }
+        const middle = Math.floor(arr.length / 2);
+        const left = arr.slice(0, middle);
+        const right = arr.slice(middle);
 
-    console.log(mergeSortTopDown(arrayToSort))
+        return mergeTopDown(mergeSortTopDown(left), mergeSortTopDown(right));
+    };
+    arr = mergeSortTopDown(arr);
+    console.log(`Tri par fusion: ${resultCompareMergeSort} comparaisons` + ` - [${arr}]`);
+}
 
-    let resultCompareselectSort = 0;
-    const selectSort = (arr, length) => {
-        for (let i = 0; i < length - 1; i++) {
-            min = i;
-            for (let j = i + 1; j < length; j++) {
-                if (arr[j] < arr[min]) {
-                    min = j;
-                }
-            }
-            if (min != i) {
-                [arr[i], arr[min]] = [arr[min], arr[i]];
-                resultCompareselectSort++;
+let resultCompareSelectSort = 0;
+const selectSort = (arr, length) => {
+    for (let i = 0; i < length - 1; i++) {
+        min = i;
+        for (let j = i + 1; j < length; j++) {
+            resultCompareSelectSort++;
+            if (arr[j] < arr[min]) {
+                min = j;
             }
         }
-        console.log(`Tri par selection: ${resultCompareselectSort} comparaisons` + ` - [${arr}]`);
-    }
+        if (min != i) {
+            [arr[i], arr[min]] = [arr[min], arr[i]];
 
-    let resultCompareinsertionSort = 0;
-    const insertionSort = (arr, length) => {
-        for (let i = 1; i < length; i++) {
-            let tmp = arr[i];
-            let j = i;
-            while (j > 0 && arr[j - 1] > tmp) {
-                arr[j] = arr[j - 1];
-                j = j - 1;
-
-                resultCompareinsertionSort++;
-            }
-            arr[j] = tmp
         }
-        console.log(`Tri par insertion: ${resultCompareinsertionSort} comparaisons` + ` - [${arr}]`);
     }
-});
+    console.log(`Tri par selection: ${resultCompareSelectSort} comparaisons` + ` - [${arr}]`);
+}
+
+let resultCompareInsertionSort = 0;
+const insertionSort = (arr, length) => {
+    for (let i = 1; i < length; i++) {
+        let tmp = arr[i];
+        let j = i;
+        while (j > 0 && arr[j - 1] > tmp) {
+            arr[j] = arr[j - 1];
+            j = j - 1;
+
+            resultCompareInsertionSort++;
+        }
+        arr[j] = tmp
+    }
+    console.log(`Tri par insertion: ${resultCompareInsertionSort} comparaisons` + ` - [${arr}]`);
+}
